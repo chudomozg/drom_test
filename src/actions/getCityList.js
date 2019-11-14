@@ -1,4 +1,3 @@
-import { GET_CITY_LIST } from "./index";
 import { fetchRequest } from "./fetchRequest";
 import { FETCH_TYPE } from "../initStore";
 

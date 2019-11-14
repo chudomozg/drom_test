@@ -11,7 +11,8 @@ export const APPSTATE = {
 };
 
 export const FETCH_TYPE = {
-  getCityList: "GET_CITYLIST"
+  getCityList: "GET_CITYLIST",
+  getDateTime: "GET_DATE_TIME"
 };
 
 //Значение города по умолчанию
@@ -27,6 +28,8 @@ export const DEFAULT_CITY = {
 export const CITY_URL =
   "https://www.mocky.io/v2/5b34c0d82f00007400376066?mocky-delay=700ms";
 
+export const DATE_TIME_URL = "https://www.mocky.io/v2/{ID}?mocky-delay=700ms";
+
 //Установка начального состояния приложения
 export const initStore = {
   appState: APPSTATE.norm, //Общее состояние приложения
@@ -39,14 +42,10 @@ export const initStore = {
     phones: null,
     cost: null
   },
-  date: [
-    //Дата, подгружается по выбору города
-    "Дата"
-  ],
-  time: [
-    //Время, подгружается по выбору города
-    "Время"
-  ],
+  dateTime: {}, //Общий массив даты и времени, подгружается с бэка
+  timeList: {}, // Список времени брони на выбранный день
+  currentDate: null, //выбранный день
+  currentTime: null, //Выбранное время
   phone: null,
   name: null
 };

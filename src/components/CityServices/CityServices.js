@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { getCityList } from "../../actions/getCityList";
 import CitySelect from "./CitySelect";
 import { changeCity } from "../../actions/changeCity";
+import { getDateTime } from "../../actions/getDateTime";
 import ServicesContent from "./ServicesContent";
 import { CITY_URL, FETCH_TYPE } from "../../initStore";
 import { fetchRequest } from "../../actions/fetchRequest";
@@ -21,7 +22,11 @@ class CityServices extends Component {
     const cityList = this.props.cityList;
     return (
       <div>
-        <CitySelect options={cityList} selectHandle={this.props.changeCity} />
+        <CitySelect
+          options={cityList}
+          selectHandle={this.props.changeCity}
+          dateTimeHandle={this.props.getDateTime}
+        />
         <ServicesContent city={this.props.city} />
       </div>
     );
@@ -38,9 +43,9 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // getCityList: bindActionCreators(getCityList, dispatch)
     getCityListProp: url => dispatch(getCityList(url, FETCH_TYPE)),
-    changeCity: cityId => dispatch(changeCity(cityId))
+    changeCity: cityId => dispatch(changeCity(cityId)),
+    getDateTime: cityId => dispatch(getDateTime(cityId))
   };
 };
 
