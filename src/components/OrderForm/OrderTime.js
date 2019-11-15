@@ -7,11 +7,11 @@ class OrderTime extends Component {
   }
 
   getOptions(timeList) {
+    console.log("timelist", timeList);
     //фильтруем только не занятое время
-    return Object.values(timeList)
+    let timeOptions = Object.values(timeList)
       .filter(item => {
-        if (item.is_not_free == false) return true;
-        // !item.is_not_free; почему-то не работает О_о
+        return !item.is_not_free;
       })
       .map(item => {
         // формируем вывод
@@ -21,18 +21,17 @@ class OrderTime extends Component {
           </option>
         );
       });
+
+    timeOptions.unshift(
+      <option key={0} value={0}>
+        {"Время"}
+      </option>
+    );
+
+    return timeOptions;
   }
 
   render() {
-    console.log("render OrderTime: timeList: ", this.props.timeList);
-    console.log(
-      "render OrderTime: getOptions(this.props.timeList): ",
-      this.getOptions(this.props.timeList)
-    );
-    console.log(
-      "render OrderTime: this.props.currentDate: ",
-      this.props.currentDate
-    );
     return <select>{this.getOptions(this.props.timeList)}</select>;
   }
 }

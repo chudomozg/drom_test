@@ -7,6 +7,7 @@ import OrderSbmtButton from "./OrderSbmtButton";
 import { connect } from "react-redux";
 import { getDateTime } from "../../actions/getDateTime";
 import { selectDate } from "../../actions/selectDate";
+import { validate } from "../../actions/validate";
 
 class OrderForm extends Component {
   constructor(props) {
@@ -29,9 +30,16 @@ class OrderForm extends Component {
           timeList={this.props.timeList}
           currentDate={this.props.currentDate}
         />
-        <OrderPhone />
-        <OrderName />
-        <OrderSbmtButton />
+
+        <OrderPhone
+          validation={this.props.validation}
+          validState={this.props.validState.isPhoneValid}
+        />
+        <OrderName
+          validation={this.props.validation}
+          validState={this.props.validState.isNameValid}
+        />
+        <OrderSbmtButton appState={this.props.appState} />
       </form>
     );
   }
@@ -43,14 +51,18 @@ const mapStateToProps = store => {
     dateTime: store.dateTime,
     city: store.city,
     currentDate: store.currentDate,
-    timeList: store.timeList
+    timeList: store.timeList,
+    appState: store.appState,
+    validState: store.validState
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getDateTime: cityId => dispatch(getDateTime(cityId)),
-    changeSelectedDate: date => dispatch(selectDate(date))
+    changeSelectedDate: date => dispatch(selectDate(date)),
+    validation: (validationType, value) =>
+      dispatch(validate(validationType, value))
   };
 };
 

@@ -30,7 +30,7 @@ export default class CitySelect extends Component {
     });
     return (
       <div>
-        <select defaultValue={DEFAULT_CITY.id} onChange={this.changeHandle}>
+        <select value={this.props.city.id} onChange={this.changeHandle}>
           {options}
         </select>
       </div>

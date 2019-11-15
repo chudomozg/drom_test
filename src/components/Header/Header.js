@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Logo from "./Logo";
 import Title from "./Title";
+import Menu from "./Menu";
 
 export default class Header extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class Header extends Component {
     return (
       <div className="header">
         <Logo imgSrc={this.getLogoFromStatus(this.props.appState)} />
+        <Menu />
         <Title content="Онлайн Запись" />
       </div>
     );

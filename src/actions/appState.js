@@ -1,8 +1,7 @@
 import { APP_STATE } from "./index";
-import { store } from "../initStore";
 
 export const appState = state => {
-  console.log(store.getState());
+  console.log("action appState - пришло состояние: ", state);
   return {
     type: APP_STATE,
     payload: state

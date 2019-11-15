@@ -4,18 +4,22 @@ import Header from "./Header/Header";
 import Content from "../components/Content";
 import Footer from "../components/Footer";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { appState } from "../actions/appState";
+import { Route } from "react-router-dom";
+import Schedule from "../components/Schedule";
+import Add from "../components/Add";
 
 class App extends Component {
   render() {
-    const { store, changeAppState, appState } = this.props;
-    // changeAppState("LOADING");
+    const appState = this.props.appState;
+
     return (
       <div className="app-wrapper">
         <div className="app">
           <Header appState={appState} />
-          <Content />
+          <Route exact path="/" component={Content} />
+          <Route exact path="/schedule" component={Schedule} />
+          <Route exact path="/add" component={Add} />
+          {/* <Content appState={appState} /> */}
           <Footer />
         </div>
       </div>
@@ -30,14 +34,5 @@ const mapStateToProps = store => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    changeAppState: bindActionCreators(appState, dispatch)
-  };
-};
-
 //Оборачиваем App и отдаем
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps)(App);

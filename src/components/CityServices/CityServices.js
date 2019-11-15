@@ -19,11 +19,11 @@ class CityServices extends Component {
   }
 
   render() {
-    const cityList = this.props.cityList;
     return (
       <div>
         <CitySelect
-          options={cityList}
+          options={this.props.cityList}
+          city={this.props.city}
           selectHandle={this.props.changeCity}
           dateTimeHandle={this.props.getDateTime}
         />
@@ -50,7 +50,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 //Оборачиваем App и отдаем
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CityServices);
+export default connect(mapStateToProps, mapDispatchToProps)(CityServices);

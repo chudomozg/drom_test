@@ -10,9 +10,17 @@ export const APPSTATE = {
   load: "LOADING"
 };
 
+//варианты типов сетевых запросов
 export const FETCH_TYPE = {
   getCityList: "GET_CITYLIST",
   getDateTime: "GET_DATE_TIME"
+};
+
+export const VALIDATION_TYPE = {
+  date: "DATE",
+  time: "TIME",
+  phone: "PHONE",
+  name: "NAME"
 };
 
 //Значение города по умолчанию
@@ -33,9 +41,15 @@ export const DATE_TIME_URL = "https://www.mocky.io/v2/{ID}?mocky-delay=700ms";
 //Установка начального состояния приложения
 export const initStore = {
   appState: APPSTATE.norm, //Общее состояние приложения
-  // city: checkDefaultCity(defaultCity, cityUrl),
+  validState: {
+    //Состояние валидности данных в форме
+    isDateValid: true,
+    isTimeValid: true,
+    isPhoneValid: true,
+    isNameValid: true
+  },
   city: DEFAULT_CITY,
-  cityList: [], //список городов в селекте, подгружается позже.
+  cityList: [DEFAULT_CITY], //список городов в селекте, подгружается позже.
   cityService: {
     // Информация о филиале, подгружается по выбору города
     address: null,
@@ -44,7 +58,7 @@ export const initStore = {
   },
   dateTime: {}, //Общий массив даты и времени, подгружается с бэка
   timeList: {}, // Список времени брони на выбранный день
-  currentDate: null, //выбранный день
+  currentDate: 0, //выбранный день
   currentTime: null, //Выбранное время
   phone: null,
   name: null

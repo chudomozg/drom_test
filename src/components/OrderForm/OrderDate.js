@@ -6,10 +6,6 @@ class OrderDate extends Component {
     this.changeHandle = this.changeHandle.bind(this);
   }
 
-  componentDidMount() {
-    console.log("OrderDate componentDidMount");
-  }
-
   changeHandle(e) {
     console.log(
       "changeHandle OrderDate target.value: ",
@@ -80,17 +76,24 @@ class OrderDate extends Component {
   }
 
   getOptionsFromObject(dateTime) {
-    return Object.keys(dateTime).map(day => {
+    let dateList = Object.keys(dateTime).map(day => {
       return (
         <option key={day} value={day}>
           {this.getFormatedDate(day)}
         </option>
       );
     });
+    dateList.unshift(
+      <option key={0} value={0}>
+        {"Дата"}
+      </option>
+    );
+
+    return dateList;
   }
 
   render() {
-    console.log("render в OrderDate: ", this.props.dateTime);
+    // console.log("render в OrderDate: ", this.props.dateTime);
     return (
       <select value={this.props.currentDate} onChange={this.changeHandle}>
         {this.getOptionsFromObject(this.props.dateTime)}

@@ -1,7 +1,10 @@
 import { fetchSuccess } from "./fetchSuccess";
+import { appState } from "./appState";
+import { APPSTATE, store } from "../initStore";
 
 export const fetchRequest = (url, fetchType) => {
   return dispatch => {
+    dispatch(appState(APPSTATE.load));
     fetch(url) //Запрос на url
       .then(response => {
         //Проверим на ошибку
@@ -13,8 +16,8 @@ export const fetchRequest = (url, fetchType) => {
       })
       .then(response => response.json())
       .then(response => {
-        console.log("Action fetchRequest", fetchType);
         dispatch(fetchSuccess(response, fetchType));
+        dispatch(appState(APPSTATE.norm));
       });
   };
 };
