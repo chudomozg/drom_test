@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { VALIDATION_TYPE } from "../../initStore";
 
 class OrderDate extends Component {
   constructor(props) {
     super(props);
     this.changeHandle = this.changeHandle.bind(this);
+    this.BlurHandle = this.BlurHandle.bind(this);
   }
 
   changeHandle(e) {
@@ -14,6 +16,10 @@ class OrderDate extends Component {
       this.props.changeSelectedDate
     );
     this.props.changeSelectedDate(e.target.value);
+  }
+
+  BlurHandle(e) {
+    this.props.validation(VALIDATION_TYPE.date, e.target.value);
   }
 
   //Я не знал, можно ли использовать библиотеки упрощающие жизнь в тестовом задании.
@@ -93,9 +99,12 @@ class OrderDate extends Component {
   }
 
   render() {
-    // console.log("render в OrderDate: ", this.props.dateTime);
     return (
-      <select value={this.props.currentDate} onChange={this.changeHandle}>
+      <select
+        value={this.props.currentDate}
+        onChange={this.changeHandle}
+        onBlur={this.BlurHandle}
+      >
         {this.getOptionsFromObject(this.props.dateTime)}
       </select>
     );

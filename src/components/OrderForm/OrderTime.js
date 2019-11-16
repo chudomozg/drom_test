@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+import { VALIDATION_TYPE } from "../../initStore";
 
 class OrderTime extends Component {
   constructor(props) {
     super(props);
-    this.options = null;
+    this.BlurHandle = this.BlurHandle.bind(this);
+  }
+
+  BlurHandle(e) {
+    this.props.validation(VALIDATION_TYPE.time, e.target.value);
   }
 
   getOptions(timeList) {
-    console.log("timelist", timeList);
     //фильтруем только не занятое время
     let timeOptions = Object.values(timeList)
       .filter(item => {
@@ -32,7 +36,11 @@ class OrderTime extends Component {
   }
 
   render() {
-    return <select>{this.getOptions(this.props.timeList)}</select>;
+    return (
+      <select onBlur={this.BlurHandle}>
+        {this.getOptions(this.props.timeList)}
+      </select>
+    );
   }
 }
 

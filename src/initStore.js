@@ -7,7 +7,8 @@ export const APPSTATE = {
   norm: "NORMAL",
   inv: "INVALID",
   fild: "FILLEDON",
-  load: "LOADING"
+  load: "LOADING",
+  submitted: "SUBMITTED"
 };
 
 //варианты типов сетевых запросов
@@ -38,15 +39,21 @@ export const CITY_URL =
 
 export const DATE_TIME_URL = "https://www.mocky.io/v2/{ID}?mocky-delay=700ms";
 
+export const VALIDSTATE = {
+  clear: "CLEAR",
+  valid: "VALID",
+  invalid: "INVALID"
+};
+
 //Установка начального состояния приложения
 export const initStore = {
   appState: APPSTATE.norm, //Общее состояние приложения
   validState: {
     //Состояние валидности данных в форме
-    isDateValid: true,
-    isTimeValid: true,
-    isPhoneValid: true,
-    isNameValid: true
+    isDateValid: VALIDSTATE.clear,
+    isTimeValid: VALIDSTATE.clear,
+    isPhoneValid: VALIDSTATE.clear,
+    isNameValid: VALIDSTATE.clear
   },
   city: DEFAULT_CITY,
   cityList: [DEFAULT_CITY], //список городов в селекте, подгружается позже.
@@ -59,24 +66,11 @@ export const initStore = {
   dateTime: {}, //Общий массив даты и времени, подгружается с бэка
   timeList: {}, // Список времени брони на выбранный день
   currentDate: 0, //выбранный день
-  currentTime: null, //Выбранное время
+  currentTime: 0, //Выбранное время
   phone: null,
-  name: null
+  name: null,
+  schedule: [] //таблица броней, заполняется по componentDidMount из Schedule
 };
 
 //создаем хранилище
 export const store = createStore(rootReducer, applyMiddleware(thunk));
-
-//Проверяем есть ли предложенный нами город по умолчанию в списке городов.
-//Если есть возвращаем его,
-// если нет, вернем первый из списка городов
-// async function checkDefaultCity(defaultCity, cityUrl) {
-//   let response = await fetch(cityUrl);
-//   if (response.ok) {
-//     let json = await response.json();
-//     console.log(json);
-//     return defaultCity;
-//   } else {
-//     alert(`Ошибка запроса к списку городов: ${response.status}`);
-//   }
-// }

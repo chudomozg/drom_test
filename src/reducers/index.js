@@ -1,13 +1,20 @@
 import { combineReducers } from "redux";
-import { initStore, FETCH_TYPE, VALIDATION_TYPE, APPSTATE } from "../initStore";
-import changeAppState from "../reducers/changeAppState";
+import {
+  initStore,
+  FETCH_TYPE,
+  VALIDATION_TYPE,
+  APPSTATE,
+  VALIDSTATE
+} from "../initStore";
 import {
   CHANGE_CITY,
   SELECT_DATE,
-  GET_CITY_LIST,
+  ADD,
   VALIDATE,
   APP_STATE,
-  FETCH_SUCCES
+  FETCH_SUCCES,
+  GET_SCHEDULE,
+  LINK_DELETE
 } from "../actions/index";
 
 const rootReducer = (state = initStore, action) => {
@@ -27,9 +34,22 @@ const rootReducer = (state = initStore, action) => {
             getNameValidationState(state.validState, action.payload.value)
           );
         }
+        case VALIDATION_TYPE.date: {
+          return Object.assign(
+            {},
+            state,
+            getDateValidationState(state.validState, action.payload.value)
+          );
+        }
+        case VALIDATION_TYPE.time: {
+          return Object.assign(
+            {},
+            state,
+            getTimeValidationState(state.validState, action.payload.value)
+          );
+        }
       }
     case APP_STATE:
-      //   return changeAppState(state, action);
       return Object.assign({}, state, {
         appState: action.payload
       });
@@ -57,6 +77,7 @@ const rootReducer = (state = initStore, action) => {
       if (action.payload == 0) {
         return Object.assign({}, state, {
           currentDate: action.payload,
+          currentTime: 0,
           timeList: {}
         });
       } else {
@@ -65,6 +86,62 @@ const rootReducer = (state = initStore, action) => {
           timeList: state.dateTime[action.payload]
         });
       }
+
+    case ADD: {
+      if (localStorage.getItem(`online-booking`)) {
+        localStorage.setItem(
+          `online-booking`,
+          JSON.stringify(
+            JSON.parse(localStorage.getItem(`online-booking`)).concat(
+              action.payload
+            )
+          )
+        );
+      } else {
+        localStorage.setItem(
+          `online-booking`,
+          JSON.stringify([action.payload])
+        );
+      }
+
+      alert(`Ваша бронь была добавлена.`);
+      return Object.assign({}, state, initStore, {
+        appState: APPSTATE.submitted
+      });
+    }
+
+    case GET_SCHEDULE: {
+      return Object.assign({}, state, {
+        schedule: action.payload
+      });
+    }
+
+    case LINK_DELETE: {
+      localStorage.setItem(
+        `online-booking`,
+        JSON.stringify(
+          JSON.parse(localStorage.getItem(`online-booking`)).filter(
+            (item, index) => {
+              return index != action.payload;
+            }
+          )
+        )
+      );
+      const newSchedule = state.schedule.filter((item, index) => {
+        return index != action.payload;
+      });
+      console.log(
+        "reducer newSchedule: ",
+        newSchedule,
+        "schedule: ",
+        state.schedule,
+        "id: ",
+        action.payload
+      );
+      return Object.assign({}, state, {
+        schedule: newSchedule
+      });
+    }
 
     default:
       return state;
@@ -100,14 +177,46 @@ const getFiltredDateTime = dateTime => {
 
 const getPhoneValidationState = (validState, value) => {
   //Проверяем телефонрегуляркой
-  console.log("редуктор value из OrderPhone: ", value);
   const phoneValidRegexp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
   const phoneValidState = phoneValidRegexp.test(value);
-  //Ложим в состояние
+  //кладем в состояние
   const newValidState = Object.assign({}, validState, {
-    isPhoneValid: phoneValidState
+    isPhoneValid: phoneValidState ? VALIDSTATE.valid : VALIDSTATE.invalid
   });
   //Если один из элементов validState == false, то appState = INVALID
+  const appState = getAppStateFromValidState(newValidState);
+  return {
+    validState: newValidState,
+    appState,
+    phone: value
+  };
+};
+
+const getNameValidationState = (validState, value) => {
+  //кладем в состояние
+  let isNameValid = VALIDSTATE.invalid;
+  if (value != null) {
+    if (value.length) {
+      isNameValid = VALIDSTATE.valid;
+    }
+  }
+  const newValidState = Object.assign({}, validState, {
+    isNameValid: isNameValid
+  });
+
+  //Если один из элементов validState == false, то appState = INVALID
+  const appState = getAppStateFromValidState(newValidState);
+  return {
+    validState: newValidState,
+    appState,
+    name: value
+  };
+};
+
+const getDateValidationState = (validState, value) => {
+  const newValidState = Object.assign({}, validState, {
+    isDateValid: value != 0 ? VALIDSTATE.valid : VALIDSTATE.invalid
+  });
   const appState = getAppStateFromValidState(newValidState);
   return {
     validState: newValidState,
@@ -115,25 +224,23 @@ const getPhoneValidationState = (validState, value) => {
   };
 };
 
-const getNameValidationState = (validState, value) => {
-  //Проверяем телефонрегуляркой
-  console.log("редуктор value из OrderName: ", value);
-  //Ложим в состояние
+const getTimeValidationState = (validState, value) => {
+  console.log("getTimeValidationState value: ", value);
   const newValidState = Object.assign({}, validState, {
-    isNameValid: value.length > 0
+    isTimeValid: value != 0 ? VALIDSTATE.valid : VALIDSTATE.invalid
   });
-  //Если один из элементов validState == false, то appState = INVALID
   const appState = getAppStateFromValidState(newValidState);
   return {
     validState: newValidState,
-    appState
+    appState,
+    currentTime: value
   };
 };
 
 //Если один из элементов validState == false, то appState = INVALID
 const getAppStateFromValidState = validState => {
-  let validStateFalseArr = Object.values(validState).filter(item => {
-    return !item;
+  let validStateInvalidArr = Object.values(validState).filter(item => {
+    if (item == VALIDSTATE.invalid || item == VALIDSTATE.clear) return true;
   });
-  return validStateFalseArr.length ? APPSTATE.inv : APPSTATE.fild;
+  return validStateInvalidArr.length ? APPSTATE.invalid : APPSTATE.fild;
 };

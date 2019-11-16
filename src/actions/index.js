@@ -6,3 +6,6 @@ export const FETCH_SUCCES = "FETCH_SUCCES";
 export const FETCH_REQUEST = "FETCH_REQUEST";
 export const FETCH_FAILURE = "FETCH_FAILURE";
 export const SELECT_DATE = "SELECT_DATE";
+export const ADD = "ADD_BOOKING";
+export const GET_SCHEDULE = "GET_SCHEDULE";
+export const LINK_DELETE = "LINK_DELETE";

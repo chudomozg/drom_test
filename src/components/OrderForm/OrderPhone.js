@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ImputMask from "react-input-mask";
-import { VALIDATION_TYPE } from "../../initStore";
+import { VALIDATION_TYPE, VALIDSTATE } from "../../initStore";
 import css from "../../styles/OrderPhone.css";
 
 class OrderPhone extends Component {
@@ -14,9 +14,10 @@ class OrderPhone extends Component {
   }
 
   render() {
-    const isFailVisible = this.props.validState
-      ? ""
-      : "order-phone-fail-visible";
+    const isFailVisible =
+      this.props.validState == VALIDSTATE.invalid
+        ? "order-phone-fail-visible"
+        : "";
     return (
       <div className="oreder-phone">
         <ImputMask

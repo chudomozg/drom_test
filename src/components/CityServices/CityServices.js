@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { getCityList } from "../../actions/getCityList";
 import CitySelect from "./CitySelect";
 import { changeCity } from "../../actions/changeCity";
 import { getDateTime } from "../../actions/getDateTime";
 import ServicesContent from "./ServicesContent";
-import { CITY_URL, FETCH_TYPE } from "../../initStore";
-import { fetchRequest } from "../../actions/fetchRequest";
+import { CITY_URL, FETCH_TYPE, APPSTATE } from "../../initStore";
 
 class CityServices extends Component {
   constructor(props) {
@@ -37,6 +35,7 @@ class CityServices extends Component {
 const mapStateToProps = store => {
   return {
     cityList: store.cityList,
+    appState: store.appState,
     city: store.city
   };
 };

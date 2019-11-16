@@ -4,11 +4,13 @@ import OrderForm from "./OrderForm/OrderForm";
 import { APPSTATE } from "../initStore";
 import { connect } from "react-redux";
 import css from "../styles/Content.css";
+import { Route, Redirect } from "react-router-dom";
 
 class Content extends Component {
   render() {
     const isPreloaderOn =
       this.props.appState == APPSTATE.load ? "preloader" : "preloaderoff";
+
     return (
       <div className="content">
         <div className={isPreloaderOn}></div>

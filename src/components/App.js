@@ -6,19 +6,24 @@ import Footer from "../components/Footer";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import Schedule from "../components/Schedule";
-import Add from "../components/Add";
+import { APPSTATE } from "../initStore";
 
 class App extends Component {
   render() {
     const appState = this.props.appState;
-
+    //Если только что отправили форму
+    //Если успею надо переписать под изменение состояния + вызвать пару action и очистить
+    //Там всплывает пару моментов, которые не хочется решать костылями
+    if (appState == APPSTATE.submitted) {
+      window.location.reload(true);
+    }
     return (
       <div className="app-wrapper">
         <div className="app">
           <Header appState={appState} />
           <Route exact path="/" component={Content} />
           <Route exact path="/schedule" component={Schedule} />
-          <Route exact path="/add" component={Add} />
+
           {/* <Content appState={appState} /> */}
           <Footer />
         </div>
