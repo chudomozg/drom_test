@@ -1,0 +1,10 @@
+.sbmt-button__button {
+  background-color: #db001b;
+  color: #fff;
+  padding: 17px 26px;
+  border: none;
+  border-radius: 50px;
+  font-family: "VerdanaPro Semibold";
+  font-size: 1.1em;
+  box-shadow: 0 5px 5px 0px #d5bdc1;
+}

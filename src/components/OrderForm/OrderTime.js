@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { VALIDATION_TYPE } from "../../initStore";
+import { VALIDATION_TYPE, VALIDSTATE } from "../../initStore";
 
 class OrderTime extends Component {
   constructor(props) {
@@ -36,8 +36,19 @@ class OrderTime extends Component {
   }
 
   render() {
+    const isClear =
+      this.props.validState == VALIDSTATE.clear
+        ? "order-form__order-time_clear"
+        : "";
+    const isInvalid =
+      this.props.validState == VALIDSTATE.invalid
+        ? "order-form__order-time_invalid"
+        : "";
     return (
-      <select onBlur={this.BlurHandle}>
+      <select
+        onBlur={this.BlurHandle}
+        className={"select order-form__order-time " + isClear + isInvalid}
+      >
         {this.getOptions(this.props.timeList)}
       </select>
     );

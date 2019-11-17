@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "../styles/App.css";
+import "../styles/app/app.css";
+import "../styles/wrapper/wrapper.css";
 import Header from "./Header/Header";
 import Content from "../components/Content";
 import Footer from "../components/Footer";
@@ -7,6 +8,7 @@ import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import Schedule from "../components/Schedule";
 import { APPSTATE } from "../initStore";
+import "../styles/fonts/__verdana-pro/fonts__verdana-pro.css";
 
 class App extends Component {
   render() {
@@ -18,13 +20,11 @@ class App extends Component {
       window.location.reload(true);
     }
     return (
-      <div className="app-wrapper">
+      <div className="wrapper">
         <div className="app">
           <Header appState={appState} />
           <Route exact path="/" component={Content} />
           <Route exact path="/schedule" component={Schedule} />
-
-          {/* <Content appState={appState} /> */}
           <Footer />
         </div>
       </div>

@@ -32,6 +32,6 @@ export default class PhoneList extends Component {
       return item;
     });
 
-    return <div className="service-phones">{list.join(", ")}</div>;
+    return <div className="services-content__phones">{list.join(", ")}</div>;
   }
 }

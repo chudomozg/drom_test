@@ -1,0 +1,10 @@
+.footer {
+  margin-top: 30px;
+  font-size: 0.8em;
+  padding-right: 30px; /* Зачем он тут? O_o */
+  color: #cccccc;
+}
+
+.footer a {
+  color: #1e77cc;
+}

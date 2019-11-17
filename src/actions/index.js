@@ -9,3 +9,4 @@ export const SELECT_DATE = "SELECT_DATE";
 export const ADD = "ADD_BOOKING";
 export const GET_SCHEDULE = "GET_SCHEDULE";
 export const LINK_DELETE = "LINK_DELETE";
+export const GET_CITYSELECT_VALIDSTATE = "GET_CITYSELECT_VALIDSTATE";

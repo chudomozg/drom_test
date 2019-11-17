@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import footer_css from "../styles/footer/footer.css";
 
 export default class Footer extends Component {
   render() {
     return (
-      <div>
+      <div className="footer">
         Нажимая "Записаться", я выражаю свое согласие с обработкой моих
         персональных данных в соответствии с принятой{" "}
         <a href="#" className="link">

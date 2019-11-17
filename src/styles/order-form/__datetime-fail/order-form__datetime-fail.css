@@ -1,0 +1,5 @@
+.order-form__datetime-fail {
+  color: #dc0d26;
+  display: none;
+  margin: 5px 2px;
+}

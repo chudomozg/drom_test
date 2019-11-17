@@ -1,9 +1,5 @@
-.app-wrapper {
+.wrapper {
   display: flex;
   justify-content: center;
   margin-top: 40px;
-}
-
-.app {
-  max-width: 540px;
 }

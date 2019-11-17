@@ -18,6 +18,7 @@ export const FETCH_TYPE = {
 };
 
 export const VALIDATION_TYPE = {
+  city: "CITY",
   date: "DATE",
   time: "TIME",
   phone: "PHONE",
@@ -50,6 +51,7 @@ export const initStore = {
   appState: APPSTATE.norm, //Общее состояние приложения
   validState: {
     //Состояние валидности данных в форме
+    isCityValid: VALIDSTATE.clear,
     isDateValid: VALIDSTATE.clear,
     isTimeValid: VALIDSTATE.clear,
     isPhoneValid: VALIDSTATE.clear,

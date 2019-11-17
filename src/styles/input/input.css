@@ -1,0 +1,16 @@
+.input {
+  font-family: "VerdanaPro Semibold";
+  padding: 15px;
+  background-color: #e8e8e8;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  font-size: 1.3em;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border: solid 1px #c1c1c1;
+  background-color: #fff;
+  box-shadow: 0 5px 5px 0px #d0d0d0;
+}

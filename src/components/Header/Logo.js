@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import css from "../../styles/logo.css";
+import "../../styles/header/__logo/header__logo.css";
 
 export default class Logo extends Component {
   render() {
-    return <img className="logo" src={this.props.imgSrc} />;
+    return <img className="header__logo" src={this.props.imgSrc} />;
   }
 }

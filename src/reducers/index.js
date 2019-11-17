@@ -14,7 +14,8 @@ import {
   APP_STATE,
   FETCH_SUCCES,
   GET_SCHEDULE,
-  LINK_DELETE
+  LINK_DELETE,
+  GET_CITYSELECT_VALIDSTATE
 } from "../actions/index";
 
 const rootReducer = (state = initStore, action) => {
@@ -48,6 +49,13 @@ const rootReducer = (state = initStore, action) => {
             getTimeValidationState(state.validState, action.payload.value)
           );
         }
+        case VALIDATION_TYPE.city: {
+          return Object.assign({}, state, {
+            validState: Object.assign({}, state.validState, {
+              isCityValid: action.payload
+            })
+          });
+        }
       }
     case APP_STATE:
       return Object.assign({}, state, {
@@ -70,7 +78,10 @@ const rootReducer = (state = initStore, action) => {
 
     case CHANGE_CITY:
       return Object.assign({}, state, {
-        city: action.payload
+        city: action.payload,
+        validState: Object.assign({}, state.validState, {
+          isCityValid: VALIDSTATE.valid
+        })
       });
 
     case SELECT_DATE:
@@ -239,7 +250,9 @@ const getTimeValidationState = (validState, value) => {
 
 //Если один из элементов validState == false, то appState = INVALID
 const getAppStateFromValidState = validState => {
-  let validStateInvalidArr = Object.values(validState).filter(item => {
+  let newValidState = validState;
+  newValidState.isCityValid = VALIDSTATE.valid; //костыль, потому что выбор города могут и не трогать - надо потом поправить
+  let validStateInvalidArr = Object.values(newValidState).filter(item => {
     if (item == VALIDSTATE.invalid || item == VALIDSTATE.clear) return true;
   });
   return validStateInvalidArr.length ? APPSTATE.invalid : APPSTATE.fild;

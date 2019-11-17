@@ -1,10 +1,18 @@
 import React, { Component } from "react";
-import { store, DEFAULT_CITY } from "../../initStore";
+import { VALIDSTATE, VALIDATION_TYPE } from "../../initStore";
+import select_css from "../../styles/select/select.css";
+import city_services__select_css from "../../styles/city-services/__select/city-services__select.css";
+import city_services__select_clear_css from "../../styles/city-services/__select/_clear/city-services__select_clear.css";
 
 export default class CitySelect extends Component {
   constructor(props) {
     super(props);
     this.changeHandle = this.changeHandle.bind(this);
+    this.validHandle = this.validHandle.bind(this);
+  }
+
+  validHandle(e) {
+    this.props.validation(VALIDATION_TYPE.city, e.target.value);
   }
 
   changeHandle(e) {
@@ -28,9 +36,18 @@ export default class CitySelect extends Component {
         </option>
       );
     });
+    const isClear =
+      this.props.validState == VALIDSTATE.clear
+        ? "city-services__select_clear"
+        : "";
     return (
       <div>
-        <select value={this.props.city.id} onChange={this.changeHandle}>
+        <select
+          className={"select city-services__select " + isClear}
+          value={this.props.city.id}
+          onChange={this.changeHandle}
+          onBlur={this.validHandle}
+        >
           {options}
         </select>
       </div>

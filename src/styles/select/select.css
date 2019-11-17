@@ -1,0 +1,30 @@
+.select {
+  font-family: "VerdanaPro Semibold";
+  padding: 15px;
+  background: url(../../../assets/arrow.png) no-repeat 99% center;
+  background-size: 22px 8px;
+  background-color: #e8e8e8;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  font-size: 1.3em;
+  -ms-appearance: none;
+  appearance: none !important;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+.select::-ms-expand {
+  display: none;
+}
+
+.select:focus {
+  border: solid 1px #c1c1c1;
+  background-color: #fff;
+  box-shadow: 0 5px 5px 0px #d0d0d0;
+}
+
+.select option {
+  border: none;
+  outline: none;
+  background-color: #fff;
+}

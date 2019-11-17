@@ -3,17 +3,17 @@ import CityServices from "./CityServices/CityServices";
 import OrderForm from "./OrderForm/OrderForm";
 import { APPSTATE } from "../initStore";
 import { connect } from "react-redux";
-import css from "../styles/Content.css";
-import { Route, Redirect } from "react-router-dom";
+import "../styles/content/__preloader/content__preloader.css";
+import "../styles/content/__preloader/_active/content__preloader_active.css";
 
 class Content extends Component {
   render() {
     const isPreloaderOn =
-      this.props.appState == APPSTATE.load ? "preloader" : "preloaderoff";
+      this.props.appState == APPSTATE.load ? "content__preloader_active" : "";
 
     return (
       <div className="content">
-        <div className={isPreloaderOn}></div>
+        <div className={"content__preloader " + isPreloaderOn}></div>
         <CityServices />
         <OrderForm />
       </div>
