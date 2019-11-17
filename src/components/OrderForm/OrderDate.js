@@ -9,12 +9,6 @@ class OrderDate extends Component {
   }
 
   changeHandle(e) {
-    console.log(
-      "changeHandle OrderDate target.value: ",
-      e.target.value,
-      "props.changeSelectedDate: ",
-      this.props.changeSelectedDate
-    );
     this.props.changeSelectedDate(e.target.value);
   }
 

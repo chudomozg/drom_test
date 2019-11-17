@@ -16,12 +16,6 @@ export default class CitySelect extends Component {
   }
 
   changeHandle(e) {
-    console.log(
-      "changeHandle target.value: ",
-      e.target.value,
-      "props.selectHandle: ",
-      this.props.selectHandle
-    );
     this.props.selectHandle(e.target.value);
     this.props.dateTimeHandle(e.target.value);
   }

@@ -67,7 +67,6 @@ class OrderForm extends Component {
         ? "время"
         : "";
 
-    console.log("validState: ", this.props.validState);
     return (
       <form onSubmit={this.onSubmitHandle}>
         <div className="order-form__wrapper ">

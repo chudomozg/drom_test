@@ -141,14 +141,7 @@ const rootReducer = (state = initStore, action) => {
       const newSchedule = state.schedule.filter((item, index) => {
         return index != action.payload;
       });
-      console.log(
-        "reducer newSchedule: ",
-        newSchedule,
-        "schedule: ",
-        state.schedule,
-        "id: ",
-        action.payload
-      );
+
       return Object.assign({}, state, {
         schedule: newSchedule
       });
@@ -236,7 +229,6 @@ const getDateValidationState = (validState, value) => {
 };
 
 const getTimeValidationState = (validState, value) => {
-  console.log("getTimeValidationState value: ", value);
   const newValidState = Object.assign({}, validState, {
     isTimeValid: value != 0 ? VALIDSTATE.valid : VALIDSTATE.invalid
   });
