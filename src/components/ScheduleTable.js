@@ -58,7 +58,7 @@ export default class ScheduleTable extends Component {
       );
     } else {
       return (
-        <div class="schedule-empty">
+        <div className="schedule-empty">
           <b>Онлайн брони отсутствуют</b>
         </div>
       );
