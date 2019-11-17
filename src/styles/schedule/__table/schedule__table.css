@@ -1,0 +1,9 @@
+.schedule__table {
+  width: 100%;
+}
+
+.schedule__table td {
+  text-align: center;
+  padding: 5px 2px;
+  border: solid 1px #e8e8e8;
+}

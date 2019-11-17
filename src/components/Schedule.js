@@ -4,7 +4,8 @@ import { store } from "../initStore";
 import { getSchedule } from "../actions/getSchedule";
 import { linkDel } from "../actions/linkDel";
 import ScheduleTable from "./ScheduleTable";
-// import css from "../styles/Content.css";
+import "../styles/schedule/schedule.css";
+import "../styles/schedule/__table/schedule__table.css";
 
 class Schedule extends Component {
   constructor(props) {

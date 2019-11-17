@@ -44,7 +44,7 @@ export default class ScheduleTable extends Component {
   render() {
     if (this.props.schedule.length) {
       return (
-        <table className="schedule-table">
+        <table className="schedule__table">
           <thead>
             <tr>
               <th>{"ID"}</th>
