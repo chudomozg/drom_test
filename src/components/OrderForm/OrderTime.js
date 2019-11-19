@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { VALIDATION_TYPE, VALIDSTATE } from "../../initStore";
+import "../../styles/select/_invalid/select_invalid.css";
 
 class OrderTime extends Component {
   constructor(props) {
@@ -12,20 +13,16 @@ class OrderTime extends Component {
   }
 
   getOptions(timeList) {
-    //фильтруем только не занятое время
-    let timeOptions = Object.values(timeList)
-      .filter(item => {
-        return !item.is_not_free;
-      })
-      .map(item => {
-        // формируем вывод
-        return (
-          <option key={item.date} value={item.date}>
-            {item.begin}-{item.end}
-          </option>
-        );
-      });
+    // формируем вывод
+    let timeOptions = timeList.map(item => {
+      return (
+        <option key={item.date} value={item.date}>
+          {item.begin}-{item.end}
+        </option>
+      );
+    });
 
+    //Добавляем дефолтное значение
     timeOptions.unshift(
       <option key={0} value={0}>
         {"Время"}
@@ -36,18 +33,17 @@ class OrderTime extends Component {
   }
 
   render() {
-    const isClear =
-      this.props.validState == VALIDSTATE.clear
-        ? "order-form__order-time_clear"
-        : "";
-    const isInvalid =
-      this.props.validState == VALIDSTATE.invalid
-        ? "order-form__order-time_invalid"
-        : "";
+    let OrderTimeSelectClasses = ["select", "order-form__order-time"];
+    if (this.props.validState == VALIDSTATE.clear)
+      OrderTimeSelectClasses.push("order-form__order-time_clear");
+
+    if (this.props.validState == VALIDSTATE.invalid)
+      OrderTimeSelectClasses.push("select_invalid");
+
     return (
       <select
         onBlur={this.BlurHandle}
-        className={"select order-form__order-time " + isClear + isInvalid}
+        className={OrderTimeSelectClasses.join(" ")}
       >
         {this.getOptions(this.props.timeList)}
       </select>

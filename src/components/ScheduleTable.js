@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import css from "../styles/Content.css";
 
 export default class ScheduleTable extends Component {
   constructor(props) {
@@ -10,7 +9,11 @@ export default class ScheduleTable extends Component {
   onLinkClick(e) {
     e.preventDefault();
     //из ссылки //домен.ру/index берем только index
-    this.props.onLinkDel(e.target.href.split("//")[1].split("/")[1]);
+    const delId = e.target.href
+      .split("?")[1]
+      .split("&")[0]
+      .split("=")[1];
+    this.props.onLinkDel(delId);
   }
 
   getTdfromObject(scheduleObj) {
@@ -20,7 +23,7 @@ export default class ScheduleTable extends Component {
           <td>
             <div className="index">{index}</div>
             <div className="delete-link">
-              <a href={index} onClick={this.onLinkClick}>
+              <a href={"?del=" + index} onClick={this.onLinkClick}>
                 {"Удалить"}
               </a>
             </div>

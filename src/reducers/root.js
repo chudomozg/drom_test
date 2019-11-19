@@ -14,9 +14,20 @@ import {
   APP_STATE,
   FETCH_SUCCES,
   GET_SCHEDULE,
-  LINK_DELETE,
-  GET_CITYSELECT_VALIDSTATE
+  LINK_DELETE
 } from "../actions/index";
+import { getFiltredDateTime, getFiltredTimeList } from "./filter";
+import {
+  getPhoneValidationState,
+  getNameValidationState,
+  getDateValidationState,
+  getTimeValidationState
+} from "./validate";
+
+//Сам главный редьюсер я не стал разносить по разным функциям и файлам (исп. combineReducers)
+//Во-первых, он не большой
+//Во-вторых, есть зависимости
+//отделил только валидацию и фильтрацию
 
 const rootReducer = (state = initStore, action) => {
   switch (action.type) {
@@ -89,12 +100,12 @@ const rootReducer = (state = initStore, action) => {
         return Object.assign({}, state, {
           currentDate: action.payload,
           currentTime: 0,
-          timeList: {}
+          timeList: []
         });
       } else {
         return Object.assign({}, state, {
           currentDate: action.payload,
-          timeList: state.dateTime[action.payload]
+          timeList: getFiltredTimeList(state.dateTime[action.payload])
         });
       }
 
@@ -153,99 +164,3 @@ const rootReducer = (state = initStore, action) => {
 };
 
 export default rootReducer;
-
-//Фильтруем dateTime от is_not_free: true
-const getFiltredDateTime = dateTime => {
-  let filtredDateTimeObj = [];
-  if (Object.keys(dateTime).length) {
-    //Фильтруем только дни со свободным временем
-    for (let day of Object.keys(dateTime)) {
-      let isDayDisable = true;
-      for (let time of Object.values(dateTime[day])) {
-        if (!time.is_not_free) isDayDisable = false;
-      }
-      //формируем вывод данных
-      if (!isDayDisable) {
-        filtredDateTimeObj[day] = dateTime[day];
-      }
-    }
-  }
-  return {
-    dateTime: filtredDateTimeObj,
-    // currentDate: Object.keys(filtredDateTimeObj)[0], //Это если без "дата" в списке дат (как было изначально)
-    currentDate: 0,
-    // timeList: filtredDateTimeObj[Object.keys(filtredDateTimeObj)[0]] /Это если без "Время" в списке времени (как было изначально)
-    timeList: {}
-  };
-};
-
-const getPhoneValidationState = (validState, value) => {
-  //Проверяем телефонрегуляркой
-  const phoneValidRegexp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
-  const phoneValidState = phoneValidRegexp.test(value);
-  //кладем в состояние
-  const newValidState = Object.assign({}, validState, {
-    isPhoneValid: phoneValidState ? VALIDSTATE.valid : VALIDSTATE.invalid
-  });
-  //Если один из элементов validState == false, то appState = INVALID
-  const appState = getAppStateFromValidState(newValidState);
-  return {
-    validState: newValidState,
-    appState,
-    phone: value
-  };
-};
-
-const getNameValidationState = (validState, value) => {
-  //кладем в состояние
-  let isNameValid = VALIDSTATE.invalid;
-  if (value != null) {
-    if (value.length) {
-      isNameValid = VALIDSTATE.valid;
-    }
-  }
-  const newValidState = Object.assign({}, validState, {
-    isNameValid: isNameValid
-  });
-
-  //Если один из элементов validState == false, то appState = INVALID
-  const appState = getAppStateFromValidState(newValidState);
-  return {
-    validState: newValidState,
-    appState,
-    name: value
-  };
-};
-
-const getDateValidationState = (validState, value) => {
-  const newValidState = Object.assign({}, validState, {
-    isDateValid: value != 0 ? VALIDSTATE.valid : VALIDSTATE.invalid
-  });
-  const appState = getAppStateFromValidState(newValidState);
-  return {
-    validState: newValidState,
-    appState
-  };
-};
-
-const getTimeValidationState = (validState, value) => {
-  const newValidState = Object.assign({}, validState, {
-    isTimeValid: value != 0 ? VALIDSTATE.valid : VALIDSTATE.invalid
-  });
-  const appState = getAppStateFromValidState(newValidState);
-  return {
-    validState: newValidState,
-    appState,
-    currentTime: value
-  };
-};
-
-//Если один из элементов validState == false, то appState = INVALID
-const getAppStateFromValidState = validState => {
-  let newValidState = validState;
-  newValidState.isCityValid = VALIDSTATE.valid; //костыль, потому что выбор города могут и не трогать - надо потом поправить
-  let validStateInvalidArr = Object.values(newValidState).filter(item => {
-    if (item == VALIDSTATE.invalid || item == VALIDSTATE.clear) return true;
-  });
-  return validStateInvalidArr.length ? APPSTATE.invalid : APPSTATE.fild;
-};

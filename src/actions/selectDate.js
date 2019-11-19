@@ -1,5 +1,4 @@
 import { SELECT_DATE } from "./index";
-import { store } from "../initStore";
 
 export const selectDate = selectedDate => {
   return {

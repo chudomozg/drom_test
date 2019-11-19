@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./reducers";
+import rootReducer from "./reducers/root";
 import thunk from "redux-thunk";
 
 //Варианты состояния AppState
@@ -66,7 +66,7 @@ export const initStore = {
     cost: null
   },
   dateTime: {}, //Общий массив даты и времени, подгружается с бэка
-  timeList: {}, // Список времени брони на выбранный день
+  timeList: [], // Список времени брони на выбранный день
   currentDate: 0, //выбранный день
   currentTime: 0, //Выбранное время
   phone: null,

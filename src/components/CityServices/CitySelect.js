@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { VALIDSTATE, VALIDATION_TYPE } from "../../initStore";
-import select_css from "../../styles/select/select.css";
-import city_services__select_css from "../../styles/city-services/__select/city-services__select.css";
-import city_services__select_clear_css from "../../styles/city-services/__select/_clear/city-services__select_clear.css";
+import "../../styles/select/select.css";
+import "../../styles/city-services/__select/city-services__select.css";
+import "../../styles/city-services/__select/_clear/city-services__select_clear.css";
 
 export default class CitySelect extends Component {
   constructor(props) {

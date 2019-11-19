@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import Logo from "./Logo";
 import Title from "./Title";
 import Menu from "./Menu";
-import header_css from "../../styles/header/header.css";
-import header__title_css from "../../styles/header/__title/header__title.css";
-import header__navbar_css from "../../styles/header/__navbar/header__navbar.css";
-import header__menu_css from "../../styles/header/__menu/header__menu.css";
+import "../../styles/header/header.css";
+import "../../styles/header/__title/header__title.css";
+import "../../styles/header/__navbar/header__navbar.css";
+import "../../styles/header/__menu/header__menu.css";
 
 export default class Header extends Component {
   constructor(props) {

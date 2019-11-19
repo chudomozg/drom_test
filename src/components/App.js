@@ -14,8 +14,6 @@ class App extends Component {
   render() {
     const appState = this.props.appState;
     //Если только что отправили форму
-    //Если успею надо переписать под изменение состояния + вызвать пару action и очистить
-    //Там всплывает пару моментов, которые не хочется решать костылями
     if (appState == APPSTATE.submitted) {
       window.location.reload(true);
     }

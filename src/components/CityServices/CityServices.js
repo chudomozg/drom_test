@@ -7,7 +7,7 @@ import { getDateTime } from "../../actions/getDateTime";
 import { validate } from "../../actions/validate";
 import ServicesContent from "./ServicesContent";
 import { CITY_URL, FETCH_TYPE, APPSTATE } from "../../initStore";
-import city_services_css from "../../styles/city-services/city-services.css";
+import "../../styles/city-services/city-services.css";
 
 class CityServices extends Component {
   constructor(props) {

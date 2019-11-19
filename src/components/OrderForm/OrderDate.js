@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { VALIDATION_TYPE, VALIDSTATE } from "../../initStore";
+import "../../styles/select/_invalid/select_invalid.css";
 
 class OrderDate extends Component {
   constructor(props) {
@@ -93,17 +94,15 @@ class OrderDate extends Component {
   }
 
   render() {
-    const isClear =
-      this.props.validState == VALIDSTATE.clear
-        ? "order-form__order-date_clear"
-        : "";
-    const isInvalid =
-      this.props.validState == VALIDSTATE.invalid
-        ? "order-form__order-date_invalid"
-        : "";
+    let OrderDateSelectClasses = ["select", "order-form__order-date"];
+    if (this.props.validState == VALIDSTATE.clear)
+      OrderDateSelectClasses.push("order-form__order-date_clear");
+    if (this.props.validState == VALIDSTATE.invalid)
+      OrderDateSelectClasses.push("select_invalid");
+
     return (
       <select
-        className={"select order-form__order-date " + isClear + isInvalid}
+        className={OrderDateSelectClasses.join(" ")}
         value={this.props.currentDate}
         onChange={this.changeHandle}
         onBlur={this.BlurHandle}

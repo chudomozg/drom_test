@@ -8,12 +8,13 @@ import "../styles/content/__preloader/_active/content__preloader_active.css";
 
 class Content extends Component {
   render() {
-    const isPreloaderOn =
-      this.props.appState == APPSTATE.load ? "content__preloader_active" : "";
+    let contentPreloaderClasses = ["content__preloader"];
+    if (this.props.appState == APPSTATE.load)
+      contentPreloaderClasses.push("content__preloader_active");
 
     return (
       <div className="content">
-        <div className={"content__preloader " + isPreloaderOn}></div>
+        <div className={contentPreloaderClasses.join(" ")}></div>
         <CityServices />
         <OrderForm />
       </div>
