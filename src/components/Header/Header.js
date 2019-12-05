@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Logo from "./Logo";
 import { Title } from "./Title";
 import Menu from "./Menu";
+import { FORM_STATE } from "../../constants";
 import "../../styles/header/header.css";
 import "../../styles/header/__title/header__title.css";
 import "../../styles/header/__navbar/header__navbar.css";
@@ -13,7 +14,7 @@ export default class Header extends Component {
   }
 
   getLogoFromStatus(state) {
-    if (state == "LOADING") {
+    if (state == FORM_STATE.load) {
       return "../assets/logo_load.svg";
     }
 
