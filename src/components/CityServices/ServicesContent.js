@@ -16,15 +16,13 @@ export default class SityServices extends Component {
   }
 
   render() {
-    const address = this.props.city.address;
-    const phones = this.props.city.phones;
-    const cost = this.props.city.price;
+    const { address, phones, price } = this.props.city;
     return (
       <div className="city-services__services-content services-content">
         <div className="services-content__address">{address}</div>
         <PhoneList list={phones} />
         <div className="services-content__cost">
-          {"Стоимость услуги " + this.costMask(cost)}
+          {"Стоимость услуги " + this.costMask(price)}
         </div>
       </div>
     );
