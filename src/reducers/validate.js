@@ -67,7 +67,7 @@ export const getTimeValidationState = (validState, value) => {
 
 //Если один из элементов validState == false, то appState = INVALID
 export const getAppStateFromValidState = validState => {
-  let newValidState = validState;
+  let newValidState = { ...validState };
   //Селект города могут и не трогать, но по дефолту у него validState = clear
   //а что бы сделать общий FORM_STATE = fild надо сделать ему valid
   //В селекте города заведомо валидное значение (по ТЗ)
