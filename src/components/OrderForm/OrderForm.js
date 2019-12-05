@@ -58,12 +58,11 @@ class OrderForm extends Component {
     )
       OrderDateTimeFailClasses.push("order-form__datetime-fail_visible");
 
-    let dateTimeFailContent =
-      this.props.validState.isDateValid == VALIDSTATE.invalid
-        ? "дату"
-        : this.props.validState.isTimeValid == VALIDSTATE.invalid
-        ? "время"
-        : "";
+    let dateTimeFailContent = "";
+    if (this.props.validState.isDateValid == VALIDSTATE.invalid)
+      dateTimeFailContent = "дату";
+    else if (this.props.validState.isTimeValid == VALIDSTATE.invalid)
+      dateTimeFailContent = "время";
 
     return (
       <form onSubmit={this.onSubmitHandle}>
