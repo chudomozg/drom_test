@@ -11,7 +11,7 @@ import {
   SELECT_DATE,
   ADD,
   VALIDATE,
-  APP_STATE,
+  SET_APP_STATE,
   FETCH_SUCCES,
   GET_SCHEDULE,
   LINK_DELETE
@@ -68,7 +68,7 @@ const rootReducer = (state = initStore, action) => {
           });
         }
       }
-    case APP_STATE:
+    case SET_APP_STATE:
       return Object.assign({}, state, {
         appState: action.payload
       });

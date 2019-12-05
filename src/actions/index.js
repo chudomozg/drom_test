@@ -1,4 +1,4 @@
-export const APP_STATE = "APP_STATE";
+export const SET_APP_STATE = "SET_APP_STATE";
 export const CHANGE_CITY = "CHANGE_CITY";
 export const VALIDATE = "VALIDATE";
 export const GET_CITY_LIST = "GET_CITY_LIST";
