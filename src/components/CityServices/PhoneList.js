@@ -9,13 +9,13 @@ export default class PhoneList extends Component {
     let phoneArr = [];
     phoneArr.push(
       "+7 (",
-      phone.substr(1, 3),
+      phone.slice(1, 4),
       ") ",
-      phone.substr(4, 3),
+      phone.slice(4, 7),
       "-",
-      phone.substr(7, 2),
+      phone.slice(7, 9),
       "-",
-      phone.substr(9, 2)
+      phone.slice(9, 11)
     );
     return phoneArr.join("");
   }
