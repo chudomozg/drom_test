@@ -1,5 +1,18 @@
 import { VALIDSTATE, FORM_STATE } from "../constants";
 
+//Если один из элементов validState == false, то appState = INVALID
+export const getAppStateFromValidState = validState => {
+  let newValidState = { ...validState };
+  //Селект города могут и не трогать, но по дефолту у него validState = clear
+  //а что бы сделать общий FORM_STATE = fild надо сделать ему valid
+  //В селекте города заведомо валидное значение (по ТЗ)
+  newValidState.isCityValid = VALIDSTATE.valid;
+  let validStateInvalidArr = Object.values(newValidState).filter(item => {
+    if (item == VALIDSTATE.invalid || item == VALIDSTATE.clear) return true;
+  });
+  return validStateInvalidArr.length ? FORM_STATE.inv : FORM_STATE.fild;
+};
+
 //валидация телефона
 export const getPhoneValidationState = (validState, value) => {
   //Проверяем телефон регуляркой
@@ -63,17 +76,4 @@ export const getTimeValidationState = (validState, value) => {
     appState,
     currentTime: value
   };
-};
-
-//Если один из элементов validState == false, то appState = INVALID
-export const getAppStateFromValidState = validState => {
-  let newValidState = { ...validState };
-  //Селект города могут и не трогать, но по дефолту у него validState = clear
-  //а что бы сделать общий FORM_STATE = fild надо сделать ему valid
-  //В селекте города заведомо валидное значение (по ТЗ)
-  newValidState.isCityValid = VALIDSTATE.valid;
-  let validStateInvalidArr = Object.values(newValidState).filter(item => {
-    if (item == VALIDSTATE.invalid || item == VALIDSTATE.clear) return true;
-  });
-  return validStateInvalidArr.length ? FORM_STATE.inv : FORM_STATE.fild;
 };
