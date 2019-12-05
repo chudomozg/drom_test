@@ -9,7 +9,7 @@ import { getDateTime } from "../../actions/getDateTime";
 import { selectDate } from "../../actions/selectDate";
 import { validate } from "../../actions/validate";
 import { addBoking } from "../../actions/add";
-import { APPSTATE, VALIDSTATE, VALIDATION_TYPE } from "../../initStore";
+import { FORM_STATE, VALIDSTATE, VALIDATION_TYPE } from "../../constants";
 import "../../styles/order-form/order-form.css";
 import "../../styles/order-form/__datetime-fail/order-form__datetime-fail.css";
 import "../../styles/order-form/__datetime-fail/_visible/order-form__datetime-fail_visible.css";
@@ -30,7 +30,7 @@ class OrderForm extends Component {
 
   onSubmitHandle(e) {
     e.preventDefault();
-    if (this.props.appState == APPSTATE.fild) {
+    if (this.props.appState == FORM_STATE.fild) {
       this.props.formSubmit({
         city: this.props.city,
         currentDate: this.props.currentDate,

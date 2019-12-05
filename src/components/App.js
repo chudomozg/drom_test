@@ -7,14 +7,14 @@ import Footer from "../components/Footer";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import Schedule from "../components/Schedule";
-import { APPSTATE } from "../initStore";
+import { FORM_STATE } from "../constants";
 import "../styles/fonts/__verdana-pro/fonts__verdana-pro.css";
 
 class App extends Component {
   render() {
     const appState = this.props.appState;
     //Если только что отправили форму
-    if (appState == APPSTATE.submitted) {
+    if (appState == FORM_STATE.submitted) {
       window.location.reload(true);
     }
     return (

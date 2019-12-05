@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { VALIDSTATE, VALIDATION_TYPE } from "../../initStore";
+import { VALIDSTATE, VALIDATION_TYPE } from "../../constants";
 import "../../styles/select/select.css";
 import "../../styles/city-services/__select/city-services__select.css";
 import "../../styles/city-services/__select/_clear/city-services__select_clear.css";

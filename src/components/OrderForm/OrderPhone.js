@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ImputMask from "react-input-mask";
-import { VALIDATION_TYPE, VALIDSTATE } from "../../initStore";
+import { VALIDATION_TYPE, VALIDSTATE } from "../../constants";
 import "../../styles/input/input.css";
 import "../../styles/input/_invalid/input_invalid.css";
 import "../../styles/order-phone/__input/order-phone__input.css";

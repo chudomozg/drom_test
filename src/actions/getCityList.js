@@ -1,5 +1,5 @@
 import { fetchRequest } from "./fetchRequest";
-import { FETCH_TYPE } from "../initStore";
+import { FETCH_TYPE } from "../constants";
 
 export const getCityList = cityUrl => {
   return dispatch => {

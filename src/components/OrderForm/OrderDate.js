@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { VALIDATION_TYPE, VALIDSTATE } from "../../initStore";
+import { VALIDATION_TYPE, VALIDSTATE } from "../../constants";
 import "../../styles/select/_invalid/select_invalid.css";
 
 class OrderDate extends Component {

@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import {
-  initStore,
   FETCH_TYPE,
   VALIDATION_TYPE,
-  APPSTATE,
+  FORM_STATE,
   VALIDSTATE
-} from "../initStore";
+} from "../constants";
+import { initStore } from "../initStore";
 import {
   CHANGE_CITY,
   SELECT_DATE,
@@ -128,7 +128,7 @@ const rootReducer = (state = initStore, action) => {
 
       alert(`Ваша бронь была добавлена.`);
       return Object.assign({}, state, initStore, {
-        appState: APPSTATE.submitted
+        appState: FORM_STATE.submitted
       });
     }
 

@@ -2,17 +2,15 @@
 //от дней в которых все занято (везде is_not_free==true)
 export const getFiltredDateTime = dateTime => {
   let filtredDateTimeObj = [];
-  if (Object.keys(dateTime).length) {
-    //Фильтруем только дни со свободным временем
-    for (let day of Object.keys(dateTime)) {
-      let isDayDisable = true;
-      for (let time of Object.values(dateTime[day])) {
-        if (!time.is_not_free) isDayDisable = false;
-      }
-      //формируем вывод данных
-      if (!isDayDisable) {
-        filtredDateTimeObj[day] = dateTime[day];
-      }
+  //Фильтруем только дни со свободным временем
+  for (let day of Object.keys(dateTime)) {
+    let isDayDisable = true;
+    for (let time of Object.values(dateTime[day])) {
+      if (!time.is_not_free) isDayDisable = false;
+    }
+    //формируем вывод данных
+    if (!isDayDisable) {
+      filtredDateTimeObj[day] = dateTime[day];
     }
   }
   return {

@@ -6,7 +6,7 @@ import { changeCity } from "../../actions/changeCity";
 import { getDateTime } from "../../actions/getDateTime";
 import { validate } from "../../actions/validate";
 import ServicesContent from "./ServicesContent";
-import { CITY_URL, FETCH_TYPE, APPSTATE } from "../../initStore";
+import { CITY_URL, FETCH_TYPE } from "../../constants";
 import "../../styles/city-services/city-services.css";
 
 class CityServices extends Component {

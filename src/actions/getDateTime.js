@@ -1,6 +1,5 @@
 import { fetchRequest } from "./fetchRequest";
-import { FETCH_TYPE } from "../initStore";
-import { DATE_TIME_URL } from "../initStore";
+import { FETCH_TYPE, DATE_TIME_URL } from "../constants";
 
 export const getDateTime = cityId => {
   const dateTimeUrl = DATE_TIME_URL.replace("{ID}", cityId);
