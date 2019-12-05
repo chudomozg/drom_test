@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Logo from "./Logo";
-import Title from "./Title";
+import { Title } from "./Title";
 import Menu from "./Menu";
 import "../../styles/header/header.css";
 import "../../styles/header/__title/header__title.css";
