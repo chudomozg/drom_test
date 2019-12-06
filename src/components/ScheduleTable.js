@@ -6,13 +6,7 @@ export default class ScheduleTable extends Component {
     this.onLinkClick = this.onLinkClick.bind(this);
   }
 
-  onLinkClick(e) {
-    e.preventDefault();
-    //из ссылки //домен.ру/index берем только index
-    const delId = e.target.href
-      .split("?")[1]
-      .split("&")[0]
-      .split("=")[1];
+  onLinkClick(delId) {
     this.props.onLinkDel(delId);
   }
 
@@ -23,7 +17,13 @@ export default class ScheduleTable extends Component {
           <td>
             <div className="index">{index}</div>
             <div className="delete-link">
-              <a href={"?del=" + index} onClick={this.onLinkClick}>
+              <a
+                href="#"
+                onClick={e => {
+                  e.preventDefault();
+                  return this.onLinkClick(index);
+                }}
+              >
                 Удалить
               </a>
             </div>
