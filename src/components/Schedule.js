@@ -12,7 +12,7 @@ class Schedule extends Component {
   }
 
   componentDidMount() {
-    this.props.getSchedule(`online-booking`);
+    this.props.getSchedule();
   }
 
   render() {
@@ -36,7 +36,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSchedule: nameOfLocStObj => dispatch(getSchedule(nameOfLocStObj)),
+    getSchedule: () => dispatch(getSchedule()),
     onLinkDel: id => dispatch(linkDel(id))
   };
 };
