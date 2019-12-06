@@ -77,17 +77,19 @@ class OrderDate extends Component {
   }
 
   getOptionsFromObject(dateTime) {
-    let dateList = Object.keys(dateTime).map(day => {
-      return (
-        <option key={day} value={day}>
-          {this.getFormatedDate(day)}
-        </option>
-      );
-    });
-    dateList.unshift(
+    let dateList = [
       <option key={0} value={0}>
         Дата
       </option>
+    ];
+    dateList = dateList.concat(
+      Object.keys(dateTime).map(day => {
+        return (
+          <option key={day} value={day}>
+            {this.getFormatedDate(day)}
+          </option>
+        );
+      })
     );
 
     return dateList;
