@@ -12,7 +12,6 @@ import { addBoking } from "../../actions/add";
 import { FORM_STATE, VALIDSTATE, VALIDATION_TYPE } from "../../constants";
 import "../../styles/order-form/order-form.css";
 import "../../styles/order-form/__datetime-fail/order-form__datetime-fail.css";
-import "../../styles/order-form/__datetime-fail/_visible/order-form__datetime-fail_visible.css";
 import "../../styles/order-form/__order-date/order-form__order-date.css";
 import "../../styles/order-form/__order-time/order-form__order-time.css";
 import "../../styles/order-form/__order-phone/order-form__order-phone.css";
@@ -51,13 +50,6 @@ class OrderForm extends Component {
   }
 
   render() {
-    let OrderDateTimeFailClasses = ["order-form__datetime-fail"];
-    if (
-      this.props.validState.isDateValid == VALIDSTATE.invalid ||
-      this.props.validState.isTimeValid == VALIDSTATE.invalid
-    )
-      OrderDateTimeFailClasses.push("order-form__datetime-fail_visible");
-
     let dateTimeFailContent = "";
     if (this.props.validState.isDateValid == VALIDSTATE.invalid)
       dateTimeFailContent = "дату";
@@ -82,9 +74,12 @@ class OrderForm extends Component {
           />
         </div>
 
-        <div className={OrderDateTimeFailClasses.join(" ")}>
-          {"Пожалуйста, выберите " + dateTimeFailContent}
-        </div>
+        {(this.props.validState.isDateValid == VALIDSTATE.invalid ||
+          this.props.validState.isTimeValid == VALIDSTATE.invalid) && (
+          <div className="order-form__datetime-fail">
+            {"Пожалуйста, выберите " + dateTimeFailContent}
+          </div>
+        )}
 
         <OrderPhone
           validation={this.props.validation}

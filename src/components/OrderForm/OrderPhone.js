@@ -5,7 +5,6 @@ import "../../styles/input/input.css";
 import "../../styles/input/_invalid/input_invalid.css";
 import "../../styles/order-phone/__input/order-phone__input.css";
 import "../../styles/order-phone/__fail/order-phone__fail.css";
-import "../../styles/order-phone/__fail/_visible/order-phone__fail_visible.css";
 
 class OrderPhone extends Component {
   constructor(props) {
@@ -24,10 +23,6 @@ class OrderPhone extends Component {
     if (this.props.validState == VALIDSTATE.invalid)
       OrderPhoneSelectClasses.push("input_invalid");
 
-    let OrderPhoneFailClasses = ["order-phone__fail"];
-    if (this.props.validState == VALIDSTATE.invalid)
-      OrderPhoneFailClasses.push("order-phone__fail_visible");
-
     return (
       <div className={OrderPhoneDivClasses.join(" ")}>
         <ImputMask
@@ -37,11 +32,12 @@ class OrderPhone extends Component {
           onBlur={this.BlurHandle}
           className={OrderPhoneSelectClasses.join(" ")}
         />
-        <div className={OrderPhoneFailClasses.join(" ")}>
-          {
-            "Пожалуйста, введите корректный телефон, иначе наши специалисты не смогут связаться с вами"
-          }
-        </div>
+        {this.props.validState == VALIDSTATE.invalid && (
+          <div className="order-phone__fail">
+            Пожалуйста, введите корректный телефон, иначе наши специалисты не
+            смогут связаться с вами
+          </div>
+        )}
       </div>
     );
   }
