@@ -24,7 +24,7 @@ export default class ScheduleTable extends Component {
             <div className="index">{index}</div>
             <div className="delete-link">
               <a href={"?del=" + index} onClick={this.onLinkClick}>
-                {"Удалить"}
+                Удалить
               </a>
             </div>
           </td>
@@ -50,10 +50,10 @@ export default class ScheduleTable extends Component {
         <table className="schedule__table">
           <thead>
             <tr>
-              <th>{"ID"}</th>
-              <th>{"Город"}</th>
-              <th>{"Дата и время"}</th>
-              <th>{"Имя и телефон"}</th>
+              <th>ID</th>
+              <th>Город</th>
+              <th>Дата и время</th>
+              <th>Имя и телефон</th>
             </tr>
             {this.getTdfromObject(this.props.schedule)}
           </thead>

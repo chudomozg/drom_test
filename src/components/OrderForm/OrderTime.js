@@ -25,7 +25,7 @@ class OrderTime extends Component {
     //Добавляем дефолтное значение
     timeOptions.unshift(
       <option key={0} value={0}>
-        {"Время"}
+        Время
       </option>
     );
 

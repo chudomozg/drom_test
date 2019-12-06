@@ -32,7 +32,7 @@ class OrderName extends Component {
           onChange={this.BlurHandle}
         />
         <div className={orderNameFailClasses.join(" ")}>
-          {"Пожалуйста, укажите имя"}
+          Пожалуйста, укажите имя
         </div>
       </div>
     );

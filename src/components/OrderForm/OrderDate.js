@@ -86,7 +86,7 @@ class OrderDate extends Component {
     });
     dateList.unshift(
       <option key={0} value={0}>
-        {"Дата"}
+        Дата
       </option>
     );
 
