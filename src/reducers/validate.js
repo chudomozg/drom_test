@@ -7,10 +7,10 @@ export const getAppStateFromValidState = validState => {
   //а что бы сделать общий FORM_STATE = fild надо сделать ему valid
   //В селекте города заведомо валидное значение (по ТЗ)
   newValidState.isCityValid = VALIDSTATE.valid;
-  let validStateInvalidArr = Object.values(newValidState).filter(item => {
-    if (item == VALIDSTATE.invalid || item == VALIDSTATE.clear) return true;
-  });
-  return validStateInvalidArr.length ? FORM_STATE.inv : FORM_STATE.fild;
+  let isFormInvalid = Object.values(newValidState).some(
+    item => item !== VALIDSTATE.valid
+  );
+  return isFormInvalid ? FORM_STATE.inv : FORM_STATE.fild;
 };
 
 //валидация телефона
