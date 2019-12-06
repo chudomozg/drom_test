@@ -89,7 +89,7 @@ const rootReducer = (state = initStore, action) => {
 
     case CHANGE_CITY:
       return Object.assign({}, state, {
-        city: action.payload,
+        city: state.cityList.find(item => item.id == action.payload),
         validState: Object.assign({}, state.validState, {
           isCityValid: VALIDSTATE.valid
         })
