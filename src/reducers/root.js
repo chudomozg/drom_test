@@ -16,13 +16,13 @@ import {
   GET_SCHEDULE,
   LINK_DELETE
 } from "../actions/index";
-import { getFiltredDateTime, getFiltredTimeList } from "./filter";
+import { getFiltredDateTime, getFiltredTimeList } from "../helpers/filter";
 import {
   getPhoneValidationState,
   getNameValidationState,
   getDateValidationState,
   getTimeValidationState
-} from "./validate";
+} from "../helpers/validate";
 
 //Сам главный редьюсер я не стал разносить по разным функциям и файлам (исп. combineReducers)
 //Во-первых, он не большой
