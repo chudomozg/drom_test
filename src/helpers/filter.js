@@ -4,11 +4,7 @@ export const getFiltredDateTime = dateTime => {
   let filtredDateTimeObj = Object.entries(dateTime)
     .filter(([key, day]) => Object.values(day).some(time => !time.is_not_free))
     .reduce((a, [key, day]) => ({ ...a, [key]: day }), {});
-  return {
-    dateTime: filtredDateTimeObj,
-    currentDate: 0,
-    timeList: []
-  };
+  return filtredDateTimeObj;
 };
 
 //фильтруем timeList на is_not_free - кладем в store уже отфильтрованный массив

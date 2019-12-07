@@ -80,11 +80,11 @@ const rootReducer = (state = initStore, action) => {
             cityList: action.payload.response.cities
           });
         case FETCH_TYPE.getDateTime:
-          return Object.assign(
-            {},
-            state,
-            getFiltredDateTime(action.payload.response.data)
-          );
+          return Object.assign({}, state, {
+            dateTime: getFiltredDateTime(action.payload.response.data),
+            currentDate: 0,
+            timeList: []
+          });
       }
 
     case CHANGE_CITY:
