@@ -40,7 +40,6 @@ const mapStateToProps = store => {
   return {
     validState: store.validState,
     cityList: store.cityList,
-    appState: store.appState,
     city: store.city
   };
 };

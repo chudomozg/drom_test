@@ -1,22 +1,16 @@
 import { combineReducers } from "redux";
-import {
-  FETCH_TYPE,
-  VALIDATION_TYPE,
-  FORM_STATE,
-  VALIDSTATE
-} from "../constants";
+import { FETCH_TYPE, VALIDATION_TYPE, VALIDSTATE } from "../constants";
 import { initStore } from "../initStore";
 import {
   CHANGE_CITY,
   SELECT_DATE,
   ADD,
   VALIDATE,
-  SET_APP_STATE,
+  SET_IS_LOADING,
   FETCH_SUCCES,
   GET_SCHEDULE,
   LINK_DELETE,
-  CHANGE_INPUT_VALUE,
-  CHANGE_TIME
+  CHANGE_INPUT_VALUE
 } from "../actions/index";
 import { getFiltredDateTime, getFiltredTimeList } from "../helpers/filter";
 import {
@@ -64,22 +58,29 @@ const rootReducer = (state = initStore, action) => {
         }
         case VALIDATION_TYPE.city: {
           return Object.assign({}, state, {
-            validState: Object.assign({}, state.validState, {
-              isCityValid: action.payload
-            })
+            validState: {
+              //Если вдруг понадобится валидация на city
+              ...state.validState,
+              ...{ isCityValid: VALIDSTATE.valid }
+            }
           });
         }
       }
-    case SET_APP_STATE:
+
+    case SET_IS_LOADING:
       return Object.assign({}, state, {
-        appState: action.payload
+        isLoading: action.payload
       });
 
     case FETCH_SUCCES:
       switch (action.payload.fetchType) {
         case FETCH_TYPE.getCityList:
           return Object.assign({}, state, {
-            cityList: action.payload.response.cities
+            cityList: action.payload.response.cities,
+            validState: {
+              ...state.validState,
+              ...{ isCityValid: VALIDSTATE.valid }
+            }
           });
         case FETCH_TYPE.getDateTime:
           return Object.assign({}, state, {
@@ -92,9 +93,10 @@ const rootReducer = (state = initStore, action) => {
     case CHANGE_CITY:
       return Object.assign({}, state, {
         city: state.cityList.find(item => item.id == action.payload),
-        validState: Object.assign({}, state.validState, {
-          isCityValid: VALIDSTATE.valid
-        })
+        validState: {
+          ...state.validState,
+          ...{ isCityValid: VALIDSTATE.valid }
+        }
       });
 
     case SELECT_DATE:
@@ -133,9 +135,9 @@ const rootReducer = (state = initStore, action) => {
         );
       }
 
-      alert(`Ваша бронь была добавлена.`);
+      alert(`Ваша бронь была добавлена.`); // тут надопереписывать
       return Object.assign({}, state, initStore, {
-        appState: FORM_STATE.submitted
+        // appState: FORM_STATE.submitted
       });
     }
 

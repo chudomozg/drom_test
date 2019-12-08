@@ -1,4 +1,3 @@
-export const SET_APP_STATE = "SET_APP_STATE";
 export const CHANGE_CITY = "CHANGE_CITY";
 export const VALIDATE = "VALIDATE";
 export const GET_CITY_LIST = "GET_CITY_LIST";
@@ -12,3 +11,4 @@ export const LINK_DELETE = "LINK_DELETE";
 export const CHANGE_PHONE = "CHANGE_PHONE";
 export const CHANGE_TIME = "CHANGE_TIME";
 export const CHANGE_INPUT_VALUE = "CHANGE_INPUT_VALUE";
+export const SET_IS_LOADING = "SET_IS_LOADING";

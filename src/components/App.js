@@ -7,20 +7,14 @@ import Footer from "../components/Footer";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import Schedule from "../components/Schedule";
-import { FORM_STATE } from "../constants";
 import "../styles/fonts/__verdana-pro/fonts__verdana-pro.css";
 
 class App extends Component {
   render() {
-    const appState = this.props.appState;
-    //Если только что отправили форму
-    if (appState == FORM_STATE.submitted) {
-      window.location.reload(true);
-    }
     return (
       <div className="wrapper">
         <div className="app">
-          <Header appState={appState} />
+          <Header isLoading={this.props.isLoading} />
           <Route exact path="/" component={Content} />
           <Route exact path="/schedule" component={Schedule} />
           <Footer />
@@ -33,7 +27,7 @@ class App extends Component {
 //Подключаем App к Store
 const mapStateToProps = store => {
   return {
-    appState: store.appState
+    isLoading: store.isLoading
   };
 };
 

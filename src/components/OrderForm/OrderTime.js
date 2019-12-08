@@ -14,7 +14,7 @@ class OrderTime extends Component {
   }
 
   changeHandle(e) {
-    this.props.change(INPUT_TYPE.currentDate, e.target.value);
+    this.props.change(INPUT_TYPE.currentTime, e.target.value);
   }
 
   getOptions(timeList) {

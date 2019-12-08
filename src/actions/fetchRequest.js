@@ -1,10 +1,9 @@
 import { fetchSuccess } from "./fetchSuccess";
-import { setAppState } from "./setAppState";
-import { FORM_STATE } from "../constants";
+import { setIsLoading } from "./setIsLoad";
 
 export const fetchRequest = (url, fetchType) => {
   return dispatch => {
-    dispatch(setAppState(FORM_STATE.load));
+    dispatch(setIsLoading(true));
     fetch(url) //Запрос на url
       .then(response => {
         //Проверим на ошибку
@@ -17,7 +16,7 @@ export const fetchRequest = (url, fetchType) => {
       .then(response => response.json())
       .then(response => {
         dispatch(fetchSuccess(response, fetchType));
-        dispatch(setAppState(FORM_STATE.norm));
+        dispatch(setIsLoading(false));
       });
   };
 };

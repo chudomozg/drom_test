@@ -7,7 +7,7 @@ import "../../styles/sbmt-button/__button/_disable/sbmt-button__button_disable.c
 class OrderSbmtButton extends Component {
   render() {
     const isDisable =
-      this.props.appState == FORM_STATE.fild
+      this.props.formState == FORM_STATE.fild
         ? ""
         : "sbmt-button__button_disable";
     return (

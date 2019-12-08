@@ -46,11 +46,33 @@ class OrderForm extends Component {
     }
   }
 
+  getFormStateFromValidState(validState) {
+    console.log("validState: ", validState);
+    //Расчитываем состояние формы
+    let isFormNotValid = Object.values(validState).some(
+      item => item !== VALIDSTATE.valid
+    );
+    //если в validState есть элементы отличные от valid
+    if (isFormNotValid) {
+      let isFormInvalid = Object.values(validState).some(
+        item => item == VALIDSTATE.inv
+      );
+      //если в validState есть invalid
+      if (isFormInvalid) return FORM_STATE.inv;
+      //если в validState только clear и valid
+      else return FORM_STATE.norm;
+    }
+    //если в validState все элементы valid
+    return FORM_STATE.fild;
+  }
+
   componentDidMount() {
     this.props.getDateTime(this.props.city.id);
   }
 
   render() {
+    const formState = this.getFormStateFromValidState(this.props.validState);
+    console.log("formState: ", formState);
     let dateTimeFailContent = "";
     if (this.props.validState.isDateValid == VALIDSTATE.invalid)
       dateTimeFailContent = "дату";
@@ -94,7 +116,7 @@ class OrderForm extends Component {
           change={this.props.changeInputValue}
           validState={this.props.validState.isNameValid}
         />
-        <OrderSbmtButton appState={this.props.appState} />
+        <OrderSbmtButton formState={formState} />
       </form>
     );
   }
@@ -107,7 +129,6 @@ const mapStateToProps = store => {
     city: store.city,
     currentDate: store.currentDate,
     timeList: store.timeList,
-    appState: store.appState,
     validState: store.validState,
     currentTime: store.currentTime,
     phone: store.phone,
