@@ -1,15 +1,20 @@
 import React, { Component } from "react";
-import { VALIDATION_TYPE, VALIDSTATE } from "../../constants";
+import { VALIDATION_TYPE, VALIDSTATE, INPUT_TYPE } from "../../constants";
 import "../../styles/select/_invalid/select_invalid.css";
 
 class OrderTime extends Component {
   constructor(props) {
     super(props);
-    this.BlurHandle = this.BlurHandle.bind(this);
+    this.blurHandle = this.blurHandle.bind(this);
+    this.changeHandle = this.changeHandle.bind(this);
   }
 
-  BlurHandle(e) {
+  blurHandle(e) {
     this.props.validation(VALIDATION_TYPE.time, e.target.value);
+  }
+
+  changeHandle(e) {
+    this.props.change(INPUT_TYPE.currentDate, e.target.value);
   }
 
   getOptions(timeList) {
@@ -42,7 +47,8 @@ class OrderTime extends Component {
 
     return (
       <select
-        onBlur={this.BlurHandle}
+        onChange={this.changeHandle}
+        onBlur={this.blurHandle}
         className={OrderTimeSelectClasses.join(" ")}
       >
         {this.getOptions(this.props.timeList)}

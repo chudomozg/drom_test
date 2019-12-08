@@ -21,6 +21,13 @@ export const VALIDATION_TYPE = {
   name: "NAME"
 };
 
+export const INPUT_TYPE = {
+  phone: "phone",
+  name: "name",
+  currentDate: "currentDate",
+  currentTime: "currentTime"
+};
+
 //Значение города по умолчанию
 export const DEFAULT_CITY = {
   id: "5b3480ee3200009f28d1e421",

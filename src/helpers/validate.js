@@ -1,7 +1,7 @@
 import { VALIDSTATE, FORM_STATE } from "../constants";
 
 //Если один из элементов validState == false, то appState = INVALID
-export const getAppStateFromValidState = validState => {
+export const getFormStateFromValidState = validState => {
   let newValidState = { ...validState };
   //Селект города могут и не трогать, но по дефолту у него validState = clear
   //а что бы сделать общий FORM_STATE = fild надо сделать ему valid
@@ -23,11 +23,10 @@ export const getPhoneValidationState = (validState, value) => {
     isPhoneValid: phoneValidState ? VALIDSTATE.valid : VALIDSTATE.invalid
   });
   //Если один из элементов validState == false, то appState = INVALID
-  const appState = getAppStateFromValidState(newValidState);
+  const appState = getFormStateFromValidState(newValidState);
   return {
     validState: newValidState,
-    appState,
-    phone: value
+    appState
   };
 };
 
@@ -45,11 +44,10 @@ export const getNameValidationState = (validState, value) => {
   });
 
   //Если один из элементов validState == false, то appState = INVALID
-  const appState = getAppStateFromValidState(newValidState);
+  const appState = getFormStateFromValidState(newValidState);
   return {
     validState: newValidState,
-    appState,
-    name: value
+    appState
   };
 };
 
@@ -58,7 +56,7 @@ export const getDateValidationState = (validState, value) => {
   const newValidState = Object.assign({}, validState, {
     isDateValid: value != 0 ? VALIDSTATE.valid : VALIDSTATE.invalid
   });
-  const appState = getAppStateFromValidState(newValidState);
+  const appState = getFormStateFromValidState(newValidState);
   return {
     validState: newValidState,
     appState
@@ -70,10 +68,9 @@ export const getTimeValidationState = (validState, value) => {
   const newValidState = Object.assign({}, validState, {
     isTimeValid: value != 0 ? VALIDSTATE.valid : VALIDSTATE.invalid
   });
-  const appState = getAppStateFromValidState(newValidState);
+  const appState = getFormStateFromValidState(newValidState);
   return {
     validState: newValidState,
-    appState,
-    currentTime: value
+    appState
   };
 };

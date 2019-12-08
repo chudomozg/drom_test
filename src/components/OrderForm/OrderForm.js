@@ -9,6 +9,7 @@ import { getDateTime } from "../../actions/getDateTime";
 import { selectDate } from "../../actions/selectDate";
 import { validate } from "../../actions/validate";
 import { addBoking } from "../../actions/add";
+import { changeInputValue } from "../../actions/changeInputValue";
 import { FORM_STATE, VALIDSTATE, VALIDATION_TYPE } from "../../constants";
 import "../../styles/order-form/order-form.css";
 import "../../styles/order-form/__datetime-fail/order-form__datetime-fail.css";
@@ -67,6 +68,7 @@ class OrderForm extends Component {
             validation={this.props.validation}
           />
           <OrderTime
+            change={this.props.changeInputValue}
             timeList={this.props.timeList}
             currentDate={this.props.currentDate}
             validation={this.props.validation}
@@ -82,11 +84,14 @@ class OrderForm extends Component {
         )}
 
         <OrderPhone
+          change={this.props.changeInputValue}
           validation={this.props.validation}
           validState={this.props.validState.isPhoneValid}
         />
         <OrderName
+          val={this.props.name}
           validation={this.props.validation}
+          change={this.props.changeInputValue}
           validState={this.props.validState.isNameValid}
         />
         <OrderSbmtButton appState={this.props.appState} />
@@ -114,6 +119,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getDateTime: cityId => dispatch(getDateTime(cityId)),
     changeSelectedDate: date => dispatch(selectDate(date)),
+    changeInputValue: (inputType, value) =>
+      dispatch(changeInputValue(inputType, value)),
     validation: (validationType, value) =>
       dispatch(validate(validationType, value)),
     formSubmit: values => dispatch(addBoking(values))

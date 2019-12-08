@@ -14,7 +14,9 @@ import {
   SET_APP_STATE,
   FETCH_SUCCES,
   GET_SCHEDULE,
-  LINK_DELETE
+  LINK_DELETE,
+  CHANGE_INPUT_VALUE,
+  CHANGE_TIME
 } from "../actions/index";
 import { getFiltredDateTime, getFiltredTimeList } from "../helpers/filter";
 import {
@@ -108,6 +110,11 @@ const rootReducer = (state = initStore, action) => {
           timeList: getFiltredTimeList(state.dateTime[action.payload])
         });
       }
+
+    case CHANGE_INPUT_VALUE:
+      return Object.assign({}, state, {
+        [action.payload.inputType]: action.payload.value
+      });
 
     case ADD: {
       if (localStorage.getItem(`online-booking`)) {
